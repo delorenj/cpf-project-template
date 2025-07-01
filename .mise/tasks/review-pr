@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+#MISE description="Create a git worktree for reviewing a pull request"
+#USAGE arg "<pr_number>" help="The PR number to review"
+#USAGE flag "--no-checkout" help="Don't checkout the worktree after creation"
+
+set -e
+
+PR_NUM="$usage_pr_number"
+WORKTREE_DIR="../review-pr-${PR_NUM}"
+BRANCH_NAME="review/pr-${PR_NUM}"
+
+# Check if worktree already exists
+if [ -d "$WORKTREE_DIR" ]; then
+    echo "Worktree $WORKTREE_DIR already exists"
+    exit 1
+fi
+
+# Create the worktree
+if [ "$usage_no_checkout" = "true" ]; then
+    git worktree add "$WORKTREE_DIR" -b "$BRANCH_NAME"
+else
+    git worktree add "$WORKTREE_DIR" -b "$BRANCH_NAME" --checkout
+fi
+
+echo "Created worktree at $WORKTREE_DIR with branch $BRANCH_NAME"
