@@ -1,4 +1,4 @@
-# Project Template with Mise Task Management
+# CPF Project Template
 
 This is a generic project template that uses [mise](https://mise.jdx.dev/) for task management and development tool versioning.
 
